@@ -18,6 +18,11 @@
 </head>
 
 <body>
+    <!-- share-to-facebook button -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v11.0"
+        nonce="YURhvUxy"></script>
+
 
     <div class="quote-container" id="quote-container">
         <!-- Quote  -->
@@ -37,6 +42,10 @@
             </button>
             <button id="new-quote" onclick="newQuote()">New Quote</button>
         </div>
+        <div class="fb-share-button" data-href="https://aviv7385.github.io/randomQuote/" data-layout="button"
+            data-size="large"><a target="_blank"
+                href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Faviv7385.github.io%2FrandomQuote%2F&amp;src=sdkpreparse"
+                class="fb-xfbml-parse-ignore">Share</a></div>
     </div>
 
     <!-- Loader -->
