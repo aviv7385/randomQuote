@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta property="og:url" content="https://www.your-domain.com/your-page.html" />
+    <meta property="og:url" content="https://aviv7385.github.io/randomQuote/" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Your Website Title" />
-    <meta property="og:description" content="Your description" />
-    <meta property="og:image" content="https://www.your-domain.com/path/image.jpg" />
+    <meta property="og:title" content="Random Quote Generator" />
+    <meta property="og:description" content="Need a motivational quote? Get it right here." />
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,34 +23,54 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v11.0"
         nonce="YURhvUxy"></script>
 
+    <div class="page">
+        <main>
+            <div class="quote-container" id="quote-container">
+                <!-- Quote  -->
+                <div class="quote-text long-quote">
+                    <!-- font-awesome quote icon -->
+                    <!-- <i class="fas fa-quote-left"></i> -->
+                    <span id="quote"></span>
+                </div>
+                <!-- Author -->
+                <div class="quote-author">
+                    <span id="author"></span>
+                </div>
+                <!-- Buttons -->
+                <div class="button-container">
+                    <button class="twitter-btn" id="twitter" title="Tweeter" onclick="tweetQuote()">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+                    <button id="new-quote" onclick="newQuote()">New Quote</button>
+                </div>
 
-    <div class="quote-container" id="quote-container">
-        <!-- Quote  -->
-        <div class="quote-text long-quote">
-            <!-- font-awesome quote icon -->
-            <i class="fas fa-quote-left"></i>
-            <span id="quote"></span>
-        </div>
-        <!-- Author -->
-        <div class="quote-author">
-            <span id="author"></span>
-        </div>
-        <!-- Buttons -->
-        <div class="button-container">
-            <button class="twitter-btn" id="twitter" title="Tweeter" onclick="tweetQuote()">
-                <i class="fab fa-twitter"></i>
-            </button>
-            <button id="new-quote" onclick="newQuote()">New Quote</button>
-        </div>
-        <div class="fb-share-button" data-href="https://aviv7385.github.io/randomQuote/" data-layout="button"
-            data-size="large"><a target="_blank"
-                href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Faviv7385.github.io%2FrandomQuote%2F&amp;src=sdkpreparse"
-                class="fb-xfbml-parse-ignore">Share</a></div>
+            </div>
+
+            <!-- Loader -->
+            <div class="loader" id="loader"></div>
+
+        </main>
+
+        <!-- footer -->
+        <footer>
+            <p>
+                Developed and Designed by Aviv Elad, 2021 &nbsp;
+                <a href="https://www.linkedin.com/in/aviv-elad-a3b1a3105/" title="Linkedin">
+                    <img src="favicons/linkedIn_logo.png" alt="Linkedin">
+                </a>
+
+                <a href="https://github.com/aviv7385?tab=repositories" title="Github">
+                    <img src="favicons/github_logo.png" alt="GitHub">
+                </a>
+            </p>
+            <div class="fb-share-button" data-href="https://aviv7385.github.io/randomQuote/" data-layout="button_count"
+                data-size="large">
+                <a target="_blank"
+                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Faviv7385.github.io%2FrandomQuote%2F&amp;src=sdkpreparse"
+                    class="fb-xfbml-parse-ignore">Share</a>
+            </div>
+        </footer>
     </div>
-
-    <!-- Loader -->
-    <div class="loader" id="loader"></div>
-
 </body>
 
 </html>

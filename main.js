@@ -33,10 +33,10 @@ function newQuote() {
     // insert quote data to the HTML elements
     // check if author field is null and replace it with "unknown"
     if (!quoteAuthor) {
-        quoteAuthorSpan.innerText = "Unknown";
+        quoteAuthorSpan.innerText = "- Unknown";
     }
     else {
-        quoteAuthorSpan.innerText = quoteAuthor;
+        quoteAuthorSpan.innerText = "- " + quoteAuthor;
     }
 
     // check the quote's length to determine the styling
@@ -68,7 +68,7 @@ async function getQuotes() {
 
 // tweet quote
 function tweetQuote() {
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteTextSpan.textContent} - ${quoteAuthorSpan.textContent}`;
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteTextSpan.textContent} ${quoteAuthorSpan.textContent}`;
     window.open(twitterUrl, "_blank"); // open window in a new tab    
 }
 
