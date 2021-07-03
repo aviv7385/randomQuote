@@ -3,8 +3,11 @@ const quoteTextSpan = document.getElementById("quote");
 const quoteAuthorSpan = document.getElementById("author");
 const quoteContainer = document.getElementById("quote-container");
 const loader = document.getElementById("loader");
+const favoriteIcon = document.getElementById("favorite");
 
 let apiQuotes = [];
+let quote = {};
+let favoriteQuotes = [];
 
 // show loader
 function showLoadingSpinner() {
@@ -21,10 +24,11 @@ function removeLoadingSpinner() {
 // show new quote
 function newQuote() {
     showLoadingSpinner(); // show loader
+    favoriteIcon.style.color = "grey";
     // get a random number between 0 and the length of the apiQuotes array
     const randomNumber = Math.floor(Math.random() * apiQuotes.length);
     // a randomly chosen quote"
-    const quote = apiQuotes[randomNumber];
+    quote = apiQuotes[randomNumber];
 
     // get specific fields from the random quote 
     const quoteText = quote.text;
@@ -63,7 +67,7 @@ async function getQuotes() {
     }
     catch (err) {
         console.log(err);
-        
+
     }
 }
 
@@ -71,6 +75,43 @@ async function getQuotes() {
 function tweetQuote() {
     const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteTextSpan.textContent} ${quoteAuthorSpan.textContent}`;
     window.open(twitterUrl, "_blank"); // open window in a new tab    
+}
+
+// add to favorites
+function addQuoteToFavorites() {
+  
+    saveToLocalStorage(quote);
+}
+
+function saveToLocalStorage(favorite) {
+    //loading favorite quotes from local storage
+    let favoriteQuotesJsonString = localStorage.getItem("favoriteQuotes");
+    if (favoriteQuotesJsonString != null) {
+        favoriteQuotes = JSON.parse(favoriteQuotesJsonString);
+    }
+
+    // check if quote was already chosen as a favorite
+    const validateQuote = favoriteQuotes.find(q => q.text === favorite.text);
+
+    // if it wasn't - add to the favorites array and change the color of the favorite icon to red
+    if (!validateQuote) {
+        // Add the new favorite quote to the array:
+        favoriteQuotes.push(favorite);
+        favoriteIcon.style.color = "red";
+    }
+    // if it's already a favorite - remove the quote from the favorite list and change the icon color back to grey
+    else {
+        removeQuoteFromFavorites(favorite);
+        favoriteIcon.style.color = "grey";
+    }
+    // Save the new array back to local storage: 
+    favoriteQuotesJsonString = JSON.stringify(favoriteQuotes);
+    localStorage.setItem("favoriteQuotes", favoriteQuotesJsonString);
+}
+
+function removeQuoteFromFavorites(favorite) {
+    const indexToBeDeleted = favoriteQuotes.findIndex(q => q.text === favorite.text);
+    favoriteQuotes.splice(indexToBeDeleted, 1);
 }
 
 // on load

@@ -88,17 +88,31 @@ button {
     box-shadow: 0 0.3rem rgba(121, 121, 121, 0.65);
 }
 
-button:hover {
+#twitter:hover, #new-quote:hover {
     filter: brightness(120%);
 }
 
-button:active {
+#twitter:active, #new-quote:active {
     transform: translate(0, 0.3rem);
     box-shadow: 0 0.1rem rgba(255, 255, 255, 0.65);
 }
 
 .fa-twitter{
     font-size: 1.5rem;
+}
+
+#icon-wrap {   
+    width: 50px;
+}
+
+#favorite {
+    cursor: pointer;
+    font-size: 2rem;
+    color: grey;
+}
+
+#favorite:hover {
+    color: red;
 }
 
 /* Media Query: Tablet or Smaller */

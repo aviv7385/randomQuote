@@ -41,10 +41,14 @@
                 </div>
                 <!-- Buttons -->
                 <div class="button-container">
-                    <button class="twitter-btn" id="twitter" title="Tweeter" onclick="tweetQuote()">
+                    <button class="twitter-btn" id="twitter" title="Share to Twitter" onclick="tweetQuote()">
                         <i class="fab fa-twitter"></i>
                     </button>
+                    <div id="icon-wrap">
+                        <i class="fas fa-heart" id="favorite" title="Add to Favorites" onclick="addQuoteToFavorites()"></i>
+                    </div>
                     <button id="new-quote" onclick="newQuote()">New Quote</button>
+                    
                 </div>
 
             </div>
