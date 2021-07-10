@@ -26,8 +26,13 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v11.0"
         nonce="db19Wgyl"></script>
 
-    <div class="page">
-        <main>
+    <div class="favorites-btn">
+        <button id="show-favorites" title="Show My Favorite Quotes" onclick="showFavoriteQuotes()"><i class="fas fa-heart"></i> &nbsp; favorites &nbsp; <i class="fas fa-heart"></i></button>
+    </div>
+
+    <div class="page" id="page-container">
+        <main id="main-container">
+
             <div class="quote-container" id="quote-container">
                 <!-- Quote  -->
                 <div class="quote-text long-quote">
@@ -45,10 +50,11 @@
                         <i class="fab fa-twitter"></i>
                     </button>
                     <div id="icon-wrap">
-                        <i class="fas fa-heart" id="favorite" title="Add to Favorites" onclick="addQuoteToFavorites()"></i>
+                        <i class="fas fa-heart" id="favorite" title="Add to Favorites"
+                            onclick="addQuoteToFavorites()"></i>
                     </div>
-                    <button id="new-quote" onclick="newQuote()">New Quote</button>
-                    
+                    <button id="new-quote" onclick="newQuote()">new quote</button>
+
                 </div>
 
             </div>

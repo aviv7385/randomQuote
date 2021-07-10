@@ -4,6 +4,7 @@ const quoteAuthorSpan = document.getElementById("author");
 const quoteContainer = document.getElementById("quote-container");
 const loader = document.getElementById("loader");
 const favoriteIcon = document.getElementById("favorite");
+const main = document.getElementById("main-container");
 
 let apiQuotes = [];
 let quote = {};
@@ -79,7 +80,7 @@ function tweetQuote() {
 
 // add to favorites
 function addQuoteToFavorites() {
-  
+
     saveToLocalStorage(quote);
 }
 
@@ -112,6 +113,21 @@ function saveToLocalStorage(favorite) {
 function removeQuoteFromFavorites(favorite) {
     const indexToBeDeleted = favoriteQuotes.findIndex(q => q.text === favorite.text);
     favoriteQuotes.splice(indexToBeDeleted, 1);
+}
+
+// when clicking on the "favorites" button - show all quotes that were favored
+function showFavoriteQuotes() {
+    // clear the main area
+    main.innerHTML = "";
+    // get the favorite quotes from the local storage and save them to an array
+    favoriteQuotes = JSON.parse(localStorage.getItem("favoriteQuotes"));
+    console.log(favoriteQuotes[0]);
+    for (let i = 0; i < favoriteQuotes.length; i++) {
+        const quoteDiv = document.createElement("div");
+        console.log(favoriteQuotes[i].text);
+        main.appendChild(quoteDiv);
+        quoteDiv.innerHTML = favoriteQuotes[i].text + " - " + favoriteQuotes[i].author;
+    }
 }
 
 // on load
