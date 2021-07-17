@@ -85,7 +85,6 @@ function tweetQuote() {
 
 // add to favorites
 function addQuoteToFavorites() {
-
     saveToLocalStorage(quote);
 }
 
@@ -98,7 +97,7 @@ function saveToLocalStorage(favorite) {
 
     // check if quote was already chosen as a favorite
     const validateQuote = favoriteQuotes.find(q => q.text === favorite.text);
-
+   
     // if it wasn't - add to the favorites array and change the color of the favorite icon to red
     if (!validateQuote) {
         // Add the new favorite quote to the array:
@@ -118,6 +117,8 @@ function saveToLocalStorage(favorite) {
 function removeQuoteFromFavorites(favorite) {
     const indexToBeDeleted = favoriteQuotes.findIndex(q => q.text === favorite.text);
     favoriteQuotes.splice(indexToBeDeleted, 1);
+    favoriteQuotesJsonString = JSON.stringify(favoriteQuotes);
+    localStorage.setItem("favoriteQuotes", favoriteQuotesJsonString);
 }
 
 function showFavoriteQuotes() {
@@ -126,23 +127,22 @@ function showFavoriteQuotes() {
     for (let i = 0; i < favoriteQuotes.length; i++) {
         const quotePar = document.createElement("p");
         quotePar.className = "fav-q-par";
-        quotePar.id = i;
+        quotePar.id = "fav" + i;
         favoritesContainer.appendChild(quotePar);
         // check if author field is null and replace it with "unknown"
         if (!favoriteQuotes[i].author) {
             favoriteQuotes[i].author = "Unknown";
         }
-        $(`#${i}`).html(`<i class="fas fa-heart heart" title="remove from favorites" id="heart${i}"></i>  ${favoriteQuotes[i].text} (${favoriteQuotes[i].author})`);
-
-        // when clicking on the heart icon (before the favorite quote) - remove it from the favorites array and update the local storage
-        $(`#heart${i}`).on("click", function () {
-            favoriteQuotes.splice(i, 1);
-            $(`#${i}`).empty();
-            // Save the new array back to local storage: 
-            favoriteQuotesJsonString = JSON.stringify(favoriteQuotes);
-            localStorage.setItem("favoriteQuotes", favoriteQuotesJsonString);
-        });
+        $(`#${quotePar.id}`).html(`<i class="fas fa-heart heart" title="remove from favorites" id="${i}"></i>&nbsp;${favoriteQuotes[i].text} (${favoriteQuotes[i].author})`);
     }
+    // when clicking on the heart icon (before the favorite quote) - remove it from the favorites array and update the local storage
+    $('.heart').on("click", function () {
+        const quoteToRemove = {};
+        // take only the text part from the quote (without the author) and save it as a property in the quoteToRemove obj
+        quoteToRemove.text = $(`#fav${this.id}`).text().split("(")[0].trim();
+        $(`#fav${this.id}`).remove(); // removes the quote from the display
+        removeQuoteFromFavorites(quoteToRemove); // removes the quote from the local storage
+    });
 }
 
 $(function () {
@@ -161,6 +161,8 @@ $(function () {
         quoteContainer.hidden = false;
         getQuotes();
     });
+
+    
 })
 
 // on load
