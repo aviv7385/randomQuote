@@ -73,7 +73,6 @@ async function getQuotes() {
     }
     catch (err) {
         console.log(err);
-
     }
 }
 
@@ -140,7 +139,7 @@ function showFavoriteQuotes() {
         const quoteToRemove = {};
         // take only the text part from the quote (without the author) and save it as a property in the quoteToRemove obj
         quoteToRemove.text = $(`#fav${this.id}`).text().split("(")[0].trim();
-        $(`#fav${this.id}`).remove(); // removes the quote from the display
+        $(`#fav${this.id}`).fadeOut(1000, 'linear'); // removes the quote from the display
         removeQuoteFromFavorites(quoteToRemove); // removes the quote from the local storage
     });
 }
@@ -151,7 +150,7 @@ $(function () {
         quoteContainer.hidden = true;
         favoritesContainer.hidden = false;
         $('#favorites-container').empty();
-        $('#favorites-container').html('<h2>your favorite quotes</h2>');
+        $('#favorites-container').html('<h2>your favorite quotes</h2><h4>to remove a quote - click on the heart</h4>');
         showFavoriteQuotes();
     });
 
