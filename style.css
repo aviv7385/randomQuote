@@ -40,7 +40,8 @@ main, footer {
 
 /*  quote  */
 
-.quote-container {
+.container {
+    margin-top: 10%;
     width: auto;
     max-width: 900px;
     padding: 20px 30px;
@@ -87,8 +88,12 @@ button {
     color: white;
     background: #9c7db0;
     outline: none;
-    padding: 0.5rem 1.8rem;
+    padding: 10px;
     box-shadow: 0 0.3rem rgba(121, 121, 121, 0.65);
+}
+
+i {
+    vertical-align: text-top;
 }
 
 #twitter:hover, #new-quote:hover {
@@ -155,25 +160,47 @@ a {
     text-decoration: none;
 }
 
-/* favorites */
+/* nav buttons */
 
-.favorites-btn {
-    position: fixed;
-    top: 3%;
-    left: 1%;
+.nav-btn .fas {
+    text-align: end;
 }
 
-#show-favorites {
-    height: 1.5rem;
-    font-size: 0.8rem;
+#show-favorites {     
+    top: 10%;
+}
+
+#homeBtn {
+    top: 3%;
+}
+
+.nav-btn {
+    margin: auto;
+    position: fixed;  
+    left: 1%;  
+    height: 2rem;
+    width: 9rem;
+    text-align: left;
+    font-size: 1rem;
     opacity: 0.5;
 }
 
-#show-favorites:hover {
+.nav-btn:hover {
     opacity: 0.8;
 }
 
-#show-favorites:active {
+.nav-btn:active {
     transform: translate(0, 0.3rem);
     box-shadow: 0 0.1rem rgba(255, 255, 255, 0.65);
+}
+
+/* favorite quotes */
+
+.fav-q-par {
+    text-align: left;
+    letter-spacing: 2px;
+}
+
+.heart {
+    color: red;
 }

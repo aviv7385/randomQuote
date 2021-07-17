@@ -1,7 +1,10 @@
+/// <reference path="jquery-3.5.1.js" />
+
 // get HTML elements 
 const quoteTextSpan = document.getElementById("quote");
 const quoteAuthorSpan = document.getElementById("author");
 const quoteContainer = document.getElementById("quote-container");
+const favoritesContainer = document.getElementById("favorites-container");
 const loader = document.getElementById("loader");
 const favoriteIcon = document.getElementById("favorite");
 const main = document.getElementById("main-container");
@@ -25,6 +28,8 @@ function removeLoadingSpinner() {
 // show new quote
 function newQuote() {
     showLoadingSpinner(); // show loader
+    favoritesContainer.hidden = true;
+
     favoriteIcon.style.color = "grey";
     // get a random number between 0 and the length of the apiQuotes array
     const randomNumber = Math.floor(Math.random() * apiQuotes.length);
@@ -115,20 +120,48 @@ function removeQuoteFromFavorites(favorite) {
     favoriteQuotes.splice(indexToBeDeleted, 1);
 }
 
-// when clicking on the "favorites" button - show all quotes that were favored
 function showFavoriteQuotes() {
-    // clear the main area
-    main.innerHTML = "";
     // get the favorite quotes from the local storage and save them to an array
     favoriteQuotes = JSON.parse(localStorage.getItem("favoriteQuotes"));
-    console.log(favoriteQuotes[0]);
     for (let i = 0; i < favoriteQuotes.length; i++) {
-        const quoteDiv = document.createElement("div");
-        console.log(favoriteQuotes[i].text);
-        main.appendChild(quoteDiv);
-        quoteDiv.innerHTML = favoriteQuotes[i].text + " - " + favoriteQuotes[i].author;
+        const quotePar = document.createElement("p");
+        quotePar.className = "fav-q-par";
+        quotePar.id = i;
+        favoritesContainer.appendChild(quotePar);
+        // check if author field is null and replace it with "unknown"
+        if (!favoriteQuotes[i].author) {
+            favoriteQuotes[i].author = "Unknown";
+        }
+        $(`#${i}`).html(`<i class="fas fa-heart heart" title="remove from favorites" id="heart${i}"></i>  ${favoriteQuotes[i].text} (${favoriteQuotes[i].author})`);
+
+        // when clicking on the heart icon (before the favorite quote) - remove it from the favorites array and update the local storage
+        $(`#heart${i}`).on("click", function () {
+            favoriteQuotes.splice(i, 1);
+            $(`#${i}`).empty();
+            // Save the new array back to local storage: 
+            favoriteQuotesJsonString = JSON.stringify(favoriteQuotes);
+            localStorage.setItem("favoriteQuotes", favoriteQuotesJsonString);
+        });
     }
 }
+
+$(function () {
+    // when clicking on the "favorites" button - show the user's favorites
+    $('#show-favorites').on('click', function () {
+        quoteContainer.hidden = true;
+        favoritesContainer.hidden = false;
+        $('#favorites-container').empty();
+        $('#favorites-container').html('<h2>your favorite quotes</h2>');
+        showFavoriteQuotes();
+    });
+
+    // when clicking on the "home" button - show the home page (call the getQuotes function to show again the random quote generator)
+    $('#homeBtn').on('click', function () {
+        favoritesContainer.hidden = true;
+        quoteContainer.hidden = false;
+        getQuotes();
+    });
+})
 
 // on load
 getQuotes();

@@ -13,6 +13,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Quote</title>
+    <!-- jQuery -->
+    <script src="jquery-3.5.1.js"></script>
     <link rel="icon" type="image/x-icon" href="favicons/favicon.ico">
     <link rel="shortcut icon" href="favicons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -25,15 +27,25 @@
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v11.0"
         nonce="db19Wgyl"></script>
-
-    <div class="favorites-btn">
-        <button id="show-favorites" title="Show My Favorite Quotes" onclick="showFavoriteQuotes()"><i class="fas fa-heart"></i> &nbsp; favorites &nbsp; <i class="fas fa-heart"></i></button>
+    <div class="navBar">
+        <div class="nav">
+            <button class="nav-btn" id="show-favorites" title="Show My Favorite Quotes">&nbsp; favorites &nbsp; <i
+                    class="fas fa-heart"></i></button>
+        </div>
+        <div class="nav">
+            <button class="nav-btn" id="homeBtn" title="go to Home Page"">&nbsp; home &nbsp; <i
+                    class=" fas fa-home"></i></button>
+        </div>
     </div>
-
     <div class="page" id="page-container">
         <main id="main-container">
+            <!-- this div will be initially visible -->
+            <div class="container" id="favorites-container">
+               
+            </div>
 
-            <div class="quote-container" id="quote-container">
+            <!-- this div will be initially visible -->
+            <div class="container" id="quote-container">
                 <!-- Quote  -->
                 <div class="quote-text long-quote">
                     <!-- font-awesome quote icon -->
